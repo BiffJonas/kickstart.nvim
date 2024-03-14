@@ -19,7 +19,8 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-jdtls',
+    'microsoft/java-debug',
   },
   config = function()
     local dap = require 'dap'
@@ -39,6 +40,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'java-debug',
       },
     }
 
@@ -82,6 +84,22 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install golang specific config
-    require('dap-go').setup()
+    dap.configurations.java = {
+      {
+        name = 'Debug (Attach) - Remote',
+        request = 'attach',
+        hostName = 'localhost',
+        port = 8080,
+        type = 'java',
+      },
+    }
+    dap.adapters.java = function(callback)
+      local port = 8080 -- Default port for Java debugging
+      callback {
+        type = 'server',
+        host = '127.0.0.1',
+        port = port,
+      }
+    end
   end,
 }
