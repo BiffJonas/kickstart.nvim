@@ -20,7 +20,7 @@ return { -- LSP Configuration & Plugins
         map('gr', builtin.lsp_references, '[G]oto [R]eferences')
         map('gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
         map('<leader>D', builtin.lsp_type_definitions, 'Type [D]efinition')
-        map('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
+        map('<leader>fs', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
         map('<leader>ws', builtin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
         map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
         map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
@@ -30,18 +30,18 @@ return { -- LSP Configuration & Plugins
 
         --    See `:help CursorHold` for information about when this is executed
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = event.buf,
-            callback = vim.lsp.buf.document_highlight,
-          })
-
-          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = event.buf,
-            callback = vim.lsp.buf.clear_references,
-          })
-        end
+        --   local client = vim.lsp.get_client_by_id(event.data.client_id)
+        --   if client and client.server_capabilities.documentHighlightProvider then
+        --     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        --       buffer = event.buf,
+        --       callback = vim.lsp.buf.document_highlight,
+        --     })
+        --
+        --     vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        --       buffer = event.buf,
+        --       callback = vim.lsp.buf.clear_references,
+        --     })
+        --   end
       end,
     })
 
@@ -49,7 +49,23 @@ return { -- LSP Configuration & Plugins
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
-      jdtls = {},
+      jdtls = {
+        -- cmd = { '/path/to/jdt-language-server/bin/jdtls' },
+        -- root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+        -- settings = {
+        --   java = {
+        --     configuration = {
+        --       runtimes = {
+        --         {
+        --           name = 'JavaSE-21',
+        --           path = '/lib/jvm/java-21-openjdk',
+        --           default = true,
+        --         },
+        --       },
+        --     },
+        --   },
+        -- },
+      },
       bashls = {},
       tsserver = {},
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -76,6 +92,10 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
+      cssls = {},
+      html = {},
+      eslint = {},
+      prettier = {},
     }
 
     require('mason').setup()
