@@ -46,6 +46,7 @@ return {
     vim.keymap.set('n', '<leader>bl', dap.set_breakpoint)
     -- vim.keymap.set('n', '<leader>dr', dap.repl.open)
     vim.keymap.set('n', '<leader>du', ':lua require("dapui").open({ reset = true })<CR>', { noremap = true, desc = 'Debug: See last session result.' })
+    vim.keymap.set('n', '<leader>dq', ':lua require("dapui").close()<CR>', { noremap = true, desc = 'Debug: See last session result.' })
 
     -- view informations in debug
     function show_dap_centered_scopes()
