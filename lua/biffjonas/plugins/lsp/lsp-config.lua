@@ -49,6 +49,7 @@ return { -- LSP Configuration & Plugins
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
+
       jdtls = {
         -- cmd = { '/path/to/jdt-language-server/bin/jdtls' },
         -- root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
@@ -66,6 +67,7 @@ return { -- LSP Configuration & Plugins
         --   },
         -- },
       },
+
       bashls = {},
       tsserver = {},
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
