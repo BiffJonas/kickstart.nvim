@@ -14,7 +14,11 @@ return {
       desc = 'harpoon file',
     },
     {
+<<<<<<< HEAD
       '<leader>e',
+=======
+      '<C-e>',
+>>>>>>> 0b1c9cd (updated harpoon and removed specs cuz of bug)
       function()
         local harpoon = require 'harpoon'
         harpoon.ui:toggle_quick_menu(harpoon:list())
